@@ -1,0 +1,25 @@
+// Revised VerifyAddress struct
+#[derive(Accounts)]
+#[instruction()]
+pub struct VerifyAddress<'info> {
+    /// The user whose address is being verified (MUST NOT BE A SIGNER).
+    /// CHECK: Used as a seed
+    pub user_to_verify: AccountInfo<'info>, // No longer a signer
+
+    // ... PDA creation logic ...
+    #[account(
+        init,
+        payer = registry_authority, // Authority pays the rent
+        space = 8 + 32 + 32 + 1 + 8,
+        seeds = [b"address", user_to_verify.key().as_ref()], // Use new field
+        bump
+    )]
+    pub verified_address: Account<'info, VerifiedAddress>,
+
+    /// The verifier (admin or registry authority). MUST BE A SIGNER AND PAYER.
+    #[account(mut)] // Needs to be mut because they are the payer
+    pub registry_authority: Signer<'info>,
+
+    // ... system_program
+}
+// Update verify_address function to use user_to_verify.key()

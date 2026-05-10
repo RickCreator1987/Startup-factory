@@ -1,0 +1,25 @@
+*** Begin Patch
+*** Add File: crates/kyc-utils/src/crypto.rs
++use ed25519_dalek::{PublicKey, Signature, Verifier};
++use anyhow::{Result, anyhow};
++
++/// Verify an ed25519 signature. Returns Ok(()) if valid, Err otherwise.
++/// pubkey_bytes: 32 bytes, sig_bytes: 64 bytes, message: arbitrary bytes
++pub fn verify_ed25519_signature(pubkey_bytes: &[u8], sig_bytes: &[u8], message: &[u8]) -> Result<()> {
++    if pubkey_bytes.len() != 32 {
++        return Err(anyhow!("pubkey must be 32 bytes"));
++    }
++    if sig_bytes.len() != 64 {
++        return Err(anyhow!("signature must be 64 bytes"));
++    }
++
++    let pk = PublicKey::from_bytes(pubkey_bytes)
++        .map_err(|e| anyhow!("invalid public key: {}", e))?;
++    let sig = Signature::from_bytes(sig_bytes)
++        .map_err(|e| anyhow!("invalid signature bytes: {}", e))?;
++
++    pk.verify(message, &sig)
++        .map_err(|e| anyhow!("signature verification failed: {}", e))
++}
++
+*** End Patch

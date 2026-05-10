@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  signer:
+    build: ./server-signer
+    environment:
+      - SIGNER_API_KEY=dev-key
+      - SIGNER_SECRET_BASE64=
+      - PORT=3001
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
+  ipfs:
+    image: ipfs/kubo:latest
+    ports:
+      - "4001:4001"
+      - "5001:5001"
+      - "8080:8080"
+    volumes:
+      - ./ipfs_data:/data/ipfs

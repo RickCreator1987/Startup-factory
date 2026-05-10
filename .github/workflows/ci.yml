@@ -1,0 +1,4 @@
+- name: Build program
+  run: |
+    cd programs/compliance_registry
+    anchor build

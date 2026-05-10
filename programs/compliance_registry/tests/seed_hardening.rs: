@@ -1,0 +1,29 @@
+use anchor_lang::prelude::*;
+use anchor_lang::solana_program::program_error::ProgramError;
+use anchor_lang::prelude::ProgramResult;
+use solana_program_test::*;
+use solana_sdk::{signer::Signer, signature::Keypair, transaction::Transaction};
+
+#[tokio::test]
+async fn try_init_twice_same_user_should_fail_with_constraint_seeds() {
+    // Arrange: bootstrap program-test environment and create user keypair
+    // NOTE: adapt imports & helpers to your existing test harness
+    let program = ProgramTest::new(
+        "compliance_registry", // crate name as in Cargo.toml
+        crate::ID,
+        processor!(crate::entry), // adjust if different
+    );
+    let mut pt = program.start_with_context().await;
+    let user = Keypair::new();
+
+    // Act: call the init instruction twice
+    // You may need to use your program client helper; below is a generic sketch
+    let res1 = /* call try_init with user */;
+    assert!(res1.is_ok());
+
+    let res2 = /* call try_init again with same user */;
+    // Assert: second call fails with seeds constraint
+    assert!(res2.is_err());
+    let err = res2.unwrap_err().to_string();
+    assert!(err.contains("ConstraintSeeds") || err.contains("ConstraintSeeds"));
+}

@@ -1,0 +1,65 @@
+*** Begin Patch
+*** Update File: sdk/typescript/src/wasm/loader.ts
+@@
+ export async function initWasm(): Promise<void> {
+   if (_wasmInit) return;
+   // dynamic import expects the wasm pack output to be at ./wasm/pkg
+   // path: sdk/typescript/src/wasm/pkg/kyc_core.js (wasm-pack default)
+   // when bundling, adjust paths as needed.
+   const pkg = await import("./wasm/pkg/kyc_core.js");
+   if (pkg && pkg.default) {
+     // some wasm-pack outputs default init function
+     await pkg.default();
+   }
+   _wasmInit = pkg;
+ }
+ 
+ export function metadataHash(input: Uint8Array): Uint8Array {
+   if (!_wasmInit) {
+     throw new Error("WASM not initialized. Call initWasm() first.");
+   }
+   // metadata_hash_js exported as a function that returns Vec<u8>
+   const res: number[] = _wasmInit.metadata_hash_js(Array.from(input));
+   return Uint8Array.from(res);
+ }
++
++// ---------- pack & compress helpers (calls into wasm)
++export function metadataPack(obj: any): Uint8Array {
++  if (!_wasmInit) throw new Error("WASM not initialized");
++  const res: number[] = _wasmInit.metadata_pack_js(obj);
++  return Uint8Array.from(res);
++}
++
++export function metadataBrotli(packed: Uint8Array, quality = 4): Uint8Array {
++  if (!_wasmInit) throw new Error("WASM not initialized");
++  const res: number[] = _wasmInit.metadata_brotli_js(Array.from(packed), quality);
++  return Uint8Array.from(res);
++}
++
++export async function packAndCompress(obj: any, quality = 4): Promise<Uint8Array> {
++  if (!_wasmInit) throw new Error("WASM not initialized");
++  const res: number[] = _wasmInit.pack_and_compress_js(obj, quality);
++  return Uint8Array.from(res);
++}
+*** End Patch
+*** Begin Patch
+*** Add File: sdk/typescript/src/mobile/index.ts
++import { initWasm, packAndCompress, metadataHash } from "../wasm/loader";
++
++/** Mobile-friendly tiny runtime:
++ *  - initWasm() must be called on app startup
++ *  - packAndCompress(obj) returns compressed bytes (ready to upload)
++ *  - metadataHash(bytes) returns 32-byte hash (Uint8Array)
++ */
++export async function initMobileRuntime() {
++  await initWasm();
++}
++
++export async function prepareMetadataForUpload(obj: any, quality = 4) {
++  return await packAndCompress(obj, quality);
++}
++
++export function computeMetadataHash(bytes: Uint8Array) {
++  return metadataHash(bytes);
++}
+*** End Patch

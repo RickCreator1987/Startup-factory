@@ -1,0 +1,18 @@
+*** Begin Patch
+*** Update File: programs/compliance_registry/src/events.rs
+@@
+ #[event]
+ pub struct AddressVerified {
+     pub owner: Pubkey,
+     pub registry: Pubkey,
+-}
++    pub verifier: Pubkey,
++}
++
++#[event]
++pub struct AddressRevoked {
++    pub owner: Pubkey,
++    pub registry: Pubkey,
++    pub revoked_by: Pubkey,
++}
+*** End Patch

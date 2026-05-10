@@ -1,0 +1,94 @@
+Trust Center Landing Page (trust/index.html)
+
+This page serves as a hub for all your compliance and trust documentation.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trust Center · GitDigital Compliance SDK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f9fafc; color: #1e293b; line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        h1 { font-size: 2.8rem; font-weight: 700; letter-spacing: -0.02em; background: linear-gradient(145deg, #0f172a, #2563eb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem; }
+        h2 { font-size: 2rem; margin: 2.5rem 0 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; }
+        .subhead { font-size: 1.2rem; color: #475569; border-left: 4px solid #3b82f6; padding-left: 1.5rem; margin: 1.5rem 0; }
+        .policy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .policy-card { background: white; border-radius: 24px; padding: 2rem; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05); border: 1px solid #f0f2f5; transition: 0.2s; }
+        .policy-card i { font-size: 2rem; color: #2563eb; margin-bottom: 1rem; }
+        .policy-card h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .policy-card p { color: #475569; margin-bottom: 1.5rem; }
+        .policy-link { text-decoration: none; color: #2563eb; font-weight: 500; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .policy-link:hover { gap: 0.8rem; }
+        .footer-links { display: flex; gap: 2rem; justify-content: center; margin: 3rem 0 2rem; color: #64748b; }
+        .footer-links a { color: #2563eb; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛡️ Trust Center</h1>
+        <div class="subhead">
+            GitDigital Products provides tooling only. Customers remain responsible for their own regulatory compliance.
+        </div>
+
+        <p style="margin: 2rem 0;">Our compliance framework is designed to align with industry standards including SOC 2, ISO/IEC 27001, GDPR, and KYC/AML requirements. Below you'll find our public policies and statements.</p>
+
+        <h2>📜 Policies & Frameworks</h2>
+        <div class="policy-grid">
+            <div class="policy-card">
+                <i class="fas fa-business-time"></i>
+                <h3>Business Continuity</h3>
+                <p>Ensuring service resilience and rapid recovery from disruptions.</p>
+                <a href="business-continuity-policy.html" class="policy-link">Read policy <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="policy-card">
+                <i class="fas fa-tornado"></i>
+                <h3>Disaster Recovery</h3>
+                <p>Technical procedures to restore infrastructure and data.</p>
+                <a href="disaster-recovery-plan.html" class="policy-link">Read plan <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="policy-card">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Incident Response</h3>
+                <p>Detection, containment, and remediation of security events.</p>
+                <a href="incident-response-policy.html" class="policy-link">Read policy <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="policy-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Risk Management</h3>
+                <p>Ongoing assessment and mitigation of operational risks.</p>
+                <a href="risk-management-policy.html" class="policy-link">Read policy <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="policy-card">
+                <i class="fas fa-database"></i>
+                <h3>Backup & Data Retention</h3>
+                <p>Policies for data backup, archival, and secure deletion.</p>
+                <a href="backup-and-data-retention-policy.html" class="policy-link">Read policy <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="policy-card">
+                <i class="fas fa-gavel"></i>
+                <h3>Regulatory Compliance</h3>
+                <p>Statement on our approach to global regulations.</p>
+                <a href="regulatory-compliance-statement.html" class="policy-link">Read statement <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <h2>🔒 Security & Disclosure</h2>
+        <p>If you discover a vulnerability, please follow our responsible disclosure process: <strong>security@gitdigital.products</strong>. See <a href="../SECURITY.md">SECURITY.md</a> for details.</p>
+
+        <hr style="margin: 3rem 0; border: none; border-top: 2px solid #e2e8f0;">
+
+        <div class="footer-links">
+            <span>© 2026 GitDigital Products</span>
+            <a href="../index.html">Home</a>
+            <a href="https://github.com/Gitdigital-products/zk-solana-kyc-compliance-sdk">GitHub</a>
+        </div>
+    </div>
+</body>
+</html>
+```
