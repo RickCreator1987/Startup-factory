@@ -1,0 +1,10 @@
+// quick-upload.js (node >= 18 recommended)
+import { initWasm } from './sdk/typescript/src/wasm/loader.js';
+import { initIpfs, uploadCompressedMetadata } from './sdk/typescript/src/ipfs/uploader.js';
+const run = async ()=>{
+  await initWasm();
+  const client = await initIpfs({url:"https://ipfs.infura.io:5001"});
+  const cid = await uploadCompressedMetadata(client, {name:"boss", id:123}, 4);
+  console.log('cid', cid);
+};
+run();

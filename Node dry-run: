@@ -1,0 +1,6 @@
+cd sdk/typescript
+npm ci
+# run tests
+npm test
+# build and dry-run publish
+npm pack   # creates a tarball locally so you can inspect what's published

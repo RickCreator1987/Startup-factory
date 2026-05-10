@@ -1,0 +1,11 @@
+hereawait program.methods
+  .verifyAddress([...metadata])
+  .accounts({
+    user: user.publicKey,
+    registry: registryPda,
+    verifiedAddress: verifiedAddressPda,
+    registryAuthority: authority.publicKey,
+    systemProgram: SystemProgram.programId,
+  })
+  .signers([authority]) // only authority signs
+  .rpc();

@@ -1,0 +1,91 @@
+Architecture Deep Dive (docs/architecture.html)
+
+Detailed explanation of the three layers.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture · GitDigital Compliance SDK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f9fafc; color: #1e293b; line-height: 1.6; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+        h1 { font-size: 2.8rem; font-weight: 700; background: linear-gradient(145deg, #0f172a, #2563eb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        h2 { font-size: 2rem; margin: 2.5rem 0 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; }
+        h3 { font-size: 1.5rem; margin: 1.8rem 0 1rem; color: #0f172a; }
+        .layer { background: white; border-radius: 24px; padding: 2rem; margin: 2rem 0; box-shadow: 0 10px 25px -8px rgba(0,0,0,0.05); border: 1px solid #f0f2f5; }
+        .layer h3 i { color: #2563eb; margin-right: 0.5rem; }
+        .diagram { background: #0f172a; color: white; padding: 2rem; border-radius: 24px; text-align: center; margin: 2rem 0; font-family: monospace; }
+        .footer-links { display: flex; gap: 2rem; justify-content: center; margin: 3rem 0 2rem; }
+        .footer-links a { color: #2563eb; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏗️ Architecture</h1>
+        <p>The SDK is composed of three primary layers that work together to enforce compliance at the token level.</p>
+
+        <div class="layer">
+            <h3><i class="fas fa-cube"></i> 1. On‑Chain Program (Rust/Anchor)</h3>
+            <p>This program contains the core logic for the Transfer Hook and validation of identity metadata. It is deployed as a Solana program (using Token-2022 extensions) and is invoked automatically whenever a token transfer occurs on a compliant mint.</p>
+            <p><strong>Key responsibilities:</strong></p>
+            <ul style="margin-left: 1.5rem;">
+                <li>Intercepting transfers via the Transfer Hook interface.</li>
+                <li>Querying the Compliance Registry to check sender/receiver KYC status.</li>
+                <li>Enforcing rules (e.g., allow only verified accounts, apply transfer limits).</li>
+            </ul>
+        </div>
+
+        <div class="layer">
+            <h3><i class="fas fa-list"></i> 2. Compliance Registry</h3>
+            <p>A public, versioned on‑chain directory of trusted KYC/AML providers and their attestations. The registry maps wallet addresses to compliance flags (e.g., "level-1 KYC", "accredited investor", "sanctions check passed"). Providers update these flags after off‑chain verification.</p>
+            <p><strong>Key responsibilities:</strong></p>
+            <ul style="margin-left: 1.5rem;">
+                <li>Storing provider public keys and their rule sets.</li>
+                <li>Maintaining a history of attestations for auditability.</li>
+                <li>Allowing token programs to read compliance data during transfers.</li>
+            </ul>
+        </div>
+
+        <div class="layer">
+            <h3><i class="fab fa-js"></i> 3. TypeScript SDK</h3>
+            <p>A high‑level library for frontend and backend integration. It abstracts the complexity of interacting with the on‑chain program and registry, providing simple methods to create compliant mints, register users, and query compliance status.</p>
+            <p><strong>Key responsibilities:</strong></p>
+            <ul style="margin-left: 1.5rem;">
+                <li>Initializing compliant mints with the correct extensions.</li>
+                <li>Submitting identity attestations to the registry.</li>
+                <li>Monitoring transfer compliance and debugging failures.</li>
+            </ul>
+        </div>
+
+        <h2>📊 Compliance Flow Diagram</h2>
+        <div class="diagram">
+            [User] → (1) KYC with Provider → (2) Provider signs attestation → (3) Attestation stored in Registry<br>
+            ↓<br>
+            [Transfer initiated] → Transfer Hook triggered → Query Registry for sender & receiver → Approved/Denied
+        </div>
+
+        <h2>Token Extensions Used</h2>
+        <ul style="margin-left: 2rem;">
+            <li><strong>Transfer Hook:</strong> Core extension that invokes our program on every transfer.</li>
+            <li><strong>Permanent Delegate:</strong> Enables administrative controls like freezing or recovering assets in compliance with regulations.</li>
+            <li><strong>Metadata Pointer:</strong> Attaches off‑chain metadata (name, symbol) to the mint.</li>
+        </ul>
+
+        <hr style="margin: 3rem 0; border-top: 2px solid #e2e8f0;">
+        <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="getting-started.html">Getting Started</a>
+            <a href="https://github.com/Gitdigital-products/zk-solana-kyc-compliance-sdk">GitHub</a>
+        </div>
+    </div>
+</body>
+</html>
+```
+
+

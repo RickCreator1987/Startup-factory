@@ -1,0 +1,29 @@
+import React, { useEffect } from "react";
+import { SafeAreaView, Button } from "react-native";
+import { enqueue } from "./kycQueue";
+import { registerBackgroundSync } from "./kycQueue";
+import { prepareMetadataForUpload } from "./mobileHelpers";
+
+export default function App() {
+  useEffect(() => {
+    registerBackgroundSync();
+  }, []);
+
+  const fakeSubmit = async () => {
+    const metadata = { name: "Boss", id: "user-1" };
+    const compressed = await prepareMetadataForUpload(metadata, 4);
+    await enqueue({
+      id: String(Date.now()),
+      ts: Date.now(),
+      action: "upload_metadata",
+      payload: { compressed: Array.from(compressed), registry: "registry_pubkey_here" }
+    });
+    alert("Queued for upload & onchain register");
+  };
+
+  return (
+    <SafeAreaView>
+      <Button title="Queue metadata (offline-friendly)" onPress={fakeSubmit} />
+    </SafeAreaView>
+  );
+}

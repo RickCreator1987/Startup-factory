@@ -1,0 +1,3 @@
+yarn add @react-native-async-storage/async-storage react-native-background-fetch ipfs-http-client tweetnacl @msgpack/msgpack react-native-blob-util uuid
+# For secure storage:
+yarn add react-native-keychain

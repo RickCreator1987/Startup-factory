@@ -1,0 +1,98 @@
+Getting Started Guide (docs/getting-started.html)
+
+Detailed installation and first steps.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started · GitDigital Compliance SDK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f9fafc; color: #1e293b; line-height: 1.6; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+        h1 { font-size: 2.8rem; font-weight: 700; background: linear-gradient(145deg, #0f172a, #2563eb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem; }
+        h2 { font-size: 2rem; margin: 2.5rem 0 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; }
+        h3 { font-size: 1.5rem; margin: 1.8rem 0 1rem; color: #0f172a; }
+        pre { background: #0f172a; color: #e2e8f0; padding: 1.5rem; border-radius: 18px; overflow-x: auto; font-family: 'JetBrains Mono', monospace; margin: 1.8rem 0; }
+        code { background: #1e293b; color: #f1f5f9; padding: 0.2rem 0.4rem; border-radius: 8px; }
+        .note { background: #dbeafe; border-left: 6px solid #2563eb; padding: 1.5rem; border-radius: 16px; margin: 2rem 0; }
+        .step { display: flex; gap: 1.5rem; margin: 2rem 0; align-items: flex-start; }
+        .step-number { background: #2563eb; color: white; width: 2.5rem; height: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
+        .footer-links { display: flex; gap: 2rem; justify-content: center; margin: 3rem 0 2rem; }
+        .footer-links a { color: #2563eb; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Getting Started</h1>
+        <p>Follow these steps to integrate the zkSolana KYC Compliance SDK into your project.</p>
+
+        <div class="note">
+            <strong>📋 Prerequisites:</strong> Rust & Solana CLI, Anchor Framework, Node.js (v18+) and Yarn.
+        </div>
+
+        <h2>Installation</h2>
+        <pre><code># Clone the repository
+git clone https://github.com/Gitdigital-products/zk-solana-kyc-compliance-sdk.git
+cd zk-solana-kyc-compliance-sdk
+
+# Install dependencies
+yarn install
+
+# Build the on-chain program
+anchor build</code></pre>
+
+        <h2>Initialize a Compliant Mint</h2>
+        <div class="step">
+            <div class="step-number">1</div>
+            <div><strong>Set up the SDK in your TypeScript project</strong>
+            <pre><code>import { ComplianceSDK } from '@gitdigital/solana-kyc-sdk';
+import { Connection, Keypair } from '@solana/web3.js';
+
+const connection = new Connection('https://api.mainnet-beta.solana.com');
+const wallet = Keypair.generate(); // In production, use a secure wallet
+
+const sdk = new ComplianceSDK(connection, wallet);</code></pre>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-number">2</div>
+            <div><strong>Create a token mint with Transfer Hook extension</strong>
+            <pre><code>const mint = await sdk.createCompliantMint({
+  name: "My Regulated Token",
+  symbol: "RWA",
+  decimals: 6,
+  authority: wallet.publicKey, // Mint authority
+  transferHookProgramId: sdk.programId, // Your deployed hook program
+});</code></pre>
+            </div>
+        </div>
+
+        <h2>Validating Transfers</h2>
+        <p>Once the mint is created, every transfer is automatically checked by the Transfer Hook. The hook queries the on‑chain Compliance Registry to verify that both sender and receiver have the required KYC flags. If not, the transaction fails at runtime.</p>
+
+        <pre><code>// This transfer will succeed only if both parties are compliant
+await transferTokens(mint, fromAccount, toAccount, amount);</code></pre>
+
+        <h2>Next Steps</h2>
+        <ul style="margin-left: 2rem;">
+            <li>Read the <a href="architecture.html">Architecture Deep Dive</a></li>
+            <li>Explore the <a href="typescript-sdk.html">TypeScript SDK Reference</a></li>
+            <li>Visit the <a href="../trust/index.html">Trust Center</a> for compliance policies</li>
+        </ul>
+
+        <hr style="margin: 3rem 0; border-top: 2px solid #e2e8f0;">
+        <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="https://github.com/Gitdigital-products/zk-solana-kyc-compliance-sdk">GitHub</a>
+        </div>
+    </div>
+</body>
+</html>
+```

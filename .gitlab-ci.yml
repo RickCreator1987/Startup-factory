@@ -1,0 +1,53 @@
+image: projectserum/build:v0.29.0 # Official Anchor build image
+
+variables:
+  NODE_VERSION: "20.x"
+  CARGO_HOME: $CI_PROJECT_DIR/.cargo
+
+cache:
+  paths:
+    - .cargo/
+    - target/
+    - node_modules/
+
+stages:
+  - install
+  - lint
+  - build
+  - test
+
+# 1. Install Dependencies
+install_deps:
+  stage: install
+  script:
+    - npm install
+    - sh -c "$(curl -sSfL https://release.solana.com/v1.18.4/install)"
+    - export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
+  artifacts:
+    paths:
+      - node_modules/
+
+# 2. Linting (Security & Style)
+lint_rust:
+  stage: lint
+  script:
+    - cargo clippy -- -D warnings
+    - cargo fmt --check
+
+# 3. Build the Solana Program
+build_program:
+  stage: build
+  script:
+    - anchor build
+  artifacts:
+    paths:
+      - target/deploy/
+
+# 4. Run Integration Tests
+run_tests:
+  stage: test
+  script:
+    - solana-keygen new --no-bip39-passphrase -o id.json
+    - anchor test --provider.cluster localnet
+  dependencies:
+    - build_program

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Solana KYC Compliance SDK — Documentation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Documentation for the Solana KYC Compliance SDK by GitDigital Products" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: #0b0b0f;
+      color: #eaeaf0;
+    }
+    h1, h2 {
+      color: #ffffff;
+    }
+    a {
+      color: #14f1ff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+    }
+    .card {
+      background: #16161d;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+    footer {
+      margin-top: 3rem;
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📚 Solana KYC Compliance SDK</h1>
+    <p>
+      Official documentation for the open-source KYC & compliance SDK built for
+      the Solana ecosystem by <strong>GitDigital Products</strong>.
+    </p>
+
+    <div class="card">
+      <h2>Getting Started</h2>
+      <ul>
+        <li><a href="overview.html">Overview</a></li>
+        <li><a href="quickstart.html">Quick Start</a></li>
+        <li><a href="architecture.html">Architecture</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Compliance & Security</h2>
+      <ul>
+        <li><a href="compliance.html">Compliance Model</a></li>
+        <li><a href="threat-model.html">Threat Model</a></li>
+        <li><a href="privacy.html">Privacy Guarantees</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Developer Docs</h2>
+      <ul>
+        <li><a href="sdk-api.html">SDK API Reference</a></li>
+        <li><a href="integration.html">Solana Integration</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Project Info</h2>
+      <ul>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="roadmap.html">Roadmap</a></li>
+        <li><a href="grant-ready.html">Grant Readiness</a></li>
+      </ul>
+    </div>
+
+    <footer>
+      © GitDigital Products — Built for Solana • Open Source • Grant Ready
+    </footer>
+  </div>
+</body>
+</html>    }
+
+    .doc-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .doc-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--solana-purple);
+    }
+
+    .doc-card h3 {
+      margin-top: 0;
+      margin-bottom: 0.4rem;
+      font-size: 1.05rem;
+    }
+
+    .doc-card p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .doc-card a {
+      display: block;
+      height: 100%;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Documentation</h1>
+    <p>
+      Technical reference and architectural documentation for the
+      Solana KYC Compliance SDK.
+    </p>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>Getting Started</h2>
+      <div class="doc-grid">
+        <div class="doc-card">
+          <a href="./getting-started.html">
+            <h3>Introduction</h3>
+            <p>Overview, goals, and non-goals of the SDK.</p>
+          </a>
+        </div>
+        <div class="doc-card">
+          <a href="./installation.html">
+            <h3>Installation</h3>
+            <p>Set up the SDK in local, staging, or production environments.</p>
+          </a>
+        </div>
+        <div class="doc-card">
+          <a href="./quickstart.html">
+            <h3>Quickstart</h3>
+            <p>Integrate KYC-aware flows in under 10 minutes.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Architecture</h2>
+      <div class="doc-grid">
+        <div class="doc-card">
+          <a href="./architecture.html">
+            <h3>System Overview</h3>
+            <p>High-level components and data flow.</p>
+          </a>
+        </div>
+        <div class="doc-card">
+          <a href="./threat-model.html">
+            <h3>Threat Model</h3>
+            <p>Assumptions, risks, and mitigation strategies.</p>
+          </a>
+        </div>
+        <div class="doc-card">
+          <a href="./privacy-model.html">
+            <h3>Privacy Model</h3>
+            <p>How identity data is minimized, scoped, and protected.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Compliance</h2>
+      <div class="doc-grid">
+        <div class="doc-card">
+          <a href="./compliance-overview.html">
+            <h3>Compliance Overview</h3>
+            <p>KYC, AML, and regulatory alignment principles.</p>
+          </a>
+        </div>
+        <div class="doc-card">
+          <a href="./jurisdictions.html">
+            <h3>Jurisdiction Support</h3>
+            <p>Region-aware compliance logic and configuration.</p>
+          </a>
+        </div>
+        <div class="doc-card">
+          <a href="./audit-readiness.html">
+            <h3>Audit Readiness</h3>
+            <p>Design choices that support audits and reviews.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Reference</h2>
+      <div class="doc-grid">
+        <div class="doc-card">
+          <a href="./api-reference.html">
+            <h3>API Reference</h3>
+            <p>Detailed SDK interfaces and usage.</p>
+          </a>
+        </div>
+        <div class="doc-card">
+          <a href="./configuration.html">
+            <h3>Configuration</h3>
+            <p>Environment variables and runtime options.</p>
+          </a>
+        </div>
+        <div class="doc-card">
+          <a href="./faq.html">
+            <h3>FAQ</h3>
+            <p>Common questions from integrators and reviewers.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 GitDigital Products · Solana KYC Compliance SDK Documentation
+  </footer>
+
+</body>
+</html>        </main>
+
+        <footer>
+            <p>© 2026 GitDigital Products. All rights reserved.</p>
+            <p>This SDK is provided for integration purposes. Developers are responsible for ensuring full regulatory compliance in their specific jurisdictions.</p>
+        </footer>
+    </div>
+</body>
+</html>
