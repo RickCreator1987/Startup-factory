@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solana KYC Compliance SDK | Developer Console</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .gradient-text {
+            background: linear-gradient(90deg, #9945FF, #14F195);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased">
+
+    <nav class="border-b border-slate-800 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-gradient-to-tr from-purple-600 to-green-400 rounded-lg"></div>
+                <span class="text-xl font-bold tracking-tight">Solana <span class="gradient-text">KYC SDK</span></span>
+            </div>
+            <div class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="#docs" class="hover:text-green-400 transition">Documentation</a>
+                <a href="#demo" class="hover:text-green-400 transition">Live Demo</a>
+                <a href="https://github.com/gitdigital-products/solana-kyc-compliance-sdk" class="hover:text-green-400 transition">GitHub</a>
+            </div>
+            <button class="bg-white text-slate-900 px-4 py-2 rounded-full text-sm font-bold hover:bg-green-400 transition">
+                Connect Wallet
+            </button>
+        </div>
+    </nav>
+
+    <header class="container mx-auto py-16 px-4 text-center">
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-6">
+            Institutional Compliance <br/>
+            <span class="gradient-text text-4xl md:text-6xl">On-Chain & Permissionless</span>
+        </h1>
+        <p class="text-slate-400 text-lg max-w-2xl mx-auto mb-10">
+            Enforce KYC/AML regulations using Solana Token Extensions. Secure, scalable, and fully open-source.
+        </p>
+        <div class="flex justify-center space-x-4">
+            <code class="bg-slate-800 px-4 py-2 rounded-lg border border-slate-700 text-green-400">
+                npm install @gitdigital/solana-kyc-sdk
+            </code>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <div class="grid md:grid-cols-3 gap-8">
+            
+            <div class="glass-card p-6 rounded-2xl">
+                <div class="text-purple-500 mb-4 text-2xl"><i class="fas fa-link"></i></div>
+                <h3 class="text-xl font-bold mb-2">Transfer Hooks</h3>
+                <p class="text-slate-400 text-sm">Intercept and validate every transaction against the compliance registry in real-time.</p>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl">
+                <div class="text-green-400 mb-4 text-2xl"><i class="fas fa-shield-halved"></i></div>
+                <h3 class="text-xl font-bold mb-2">Token-2022 Ready</h3>
+                <p class="text-slate-400 text-sm">Fully compatible with the latest Solana Token Extensions for RWAs and stablecoins.</p>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl">
+                <div class="text-blue-400 mb-4 text-2xl"><i class="fas fa-id-card"></i></div>
+                <h3 class="text-xl font-bold mb-2">Identity Registry</h3>
+                <p class="text-slate-400 text-sm">Maintain a decentralized list of verified users across multiple jurisdictions.</p>
+            </div>
+
+        </div>
+
+        <section id="demo" class="mt-20 glass-card p-8 rounded-3xl border-green-500/20">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div>
+                    <h2 class="text-2xl font-bold mb-2">Compliance Simulator</h2>
+                    <p class="text-slate-400">Check if an address is eligible for regulated transfers.</p>
+                </div>
+                <div class="mt-4 md:mt-0 flex space-x-2">
+                    <input type="text" placeholder="Enter Solana Address..." class="bg-slate-800 border border-slate-700 px-4 py-2 rounded-lg w-64 focus:outline-none focus:border-green-400">
+                    <button class="bg-green-500 text-slate-900 px-6 py-2 rounded-lg font-bold hover:shadow-[0_0_15px_rgba(20,241,149,0.4)] transition">
+                        Verify
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-slate-800 py-10 mt-20">
+        <div class="container mx-auto px-4 text-center text-slate-500 text-sm">
+            <p>&copy; 2024 GitDigital Products. Built for the Solana Global Ecosystem.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
+        </main>
+
+        <footer>
+            <p>© 2025 GitDigital Products. All rights reserved.</p>
+            <p>This SDK is provided for integration purposes. Developers are responsible for ensuring full regulatory compliance in their specific jurisdictions.</p>
+        </footer>
+    </div>
+</body>
+</html>

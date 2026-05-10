@@ -1,0 +1,17 @@
+async function revokeUserAddress(userPubkey: PublicKey) {
+  const registryAuthority = provider.wallet.publicKey;
+  const [verifiedPda] = await findVerifiedAddressPda(userPubkey);
+
+  console.log("Revoking address:", userPubkey.toBase58());
+
+  const txSig = await program.methods
+    .revokeAddress()
+    .accounts({
+      registryAuthority,
+      verifiedAddress: verifiedPda,
+      user: userPubkey,
+    })
+    .rpc();
+
+  console.log("🚫 Revocation transaction:", txSig);
+}

@@ -1,0 +1,12 @@
+*** Begin Patch
+*** Add File: crates/kyc-utils/tests/cache_test.rs
++use kyc_utils::cache::Cache;
++
++#[test]
++fn test_memory_cache_roundtrip() {
++    let c = Cache::new();
++    c.set("abc", b"123".to_vec());
++    let out = c.get("abc").unwrap();
++    assert_eq!(out, b"123");
++}
+*** End Patch

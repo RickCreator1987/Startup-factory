@@ -1,0 +1,7 @@
+use crate::kyc::{verify_address::*, verify_identity::*};
+
+pub fn process_verification(ctx: Context<VerifyKyc>, input: VerifyInput) -> Result<()> {
+    verify_address(ctx.accounts.user.key(), &input.address)?;
+    verify_identity(&input.document)?;
+    Ok(())
+}

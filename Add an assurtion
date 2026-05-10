@@ -1,0 +1,2 @@
+const verified = await program.account.verifiedAddress.fetch(verifiedAddressPda);
+assert.equal(verified.owner.toBase58(), user.publicKey.toBase58());
