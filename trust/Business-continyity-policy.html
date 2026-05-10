@@ -1,0 +1,73 @@
+Example Policy Page (trust/business-continuity-policy.html)
+
+Template for any policy document. Replace the placeholder content with your actual policy text.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Continuity Policy · GitDigital Trust</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f9fafc; color: #1e293b; line-height: 1.7; }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1.5rem; }
+        .meta { color: #64748b; margin-bottom: 2rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 1rem; }
+        h2 { font-size: 1.8rem; margin: 2rem 0 1rem; }
+        h3 { font-size: 1.4rem; margin: 1.5rem 0 0.8rem; color: #0f172a; }
+        p { margin: 1.2rem 0; }
+        ul, ol { margin-left: 2rem; margin-bottom: 1.5rem; }
+        .footer-links { display: flex; gap: 2rem; justify-content: center; margin: 4rem 0 2rem; }
+        .footer-links a { color: #2563eb; text-decoration: none; }
+        .back-link { display: inline-block; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Trust Center</a>
+        <h1>📋 Business Continuity Policy</h1>
+        <div class="meta">
+            <i class="far fa-calendar"></i> Version 1.0 · Last updated: January 2026<br>
+            <i class="far fa-building"></i> GitDigital Products
+        </div>
+
+        <!-- Insert your policy content here. Below is a template based on common practices. -->
+        <h2>1. Purpose</h2>
+        <p>This policy establishes the framework for ensuring critical business functions can continue during and after a disruption. It applies to all systems and personnel supporting the zkSolana KYC Compliance SDK.</p>
+
+        <h2>2. Scope</h2>
+        <p>The policy covers:</p>
+        <ul>
+            <li>Core infrastructure (RPC nodes, indexers, build pipelines).</li>
+            <li>Development and release processes.</li>
+            <li>Communication channels with users and stakeholders.</li>
+        </ul>
+
+        <h2>3. Recovery Objectives</h2>
+        <ul>
+            <li><strong>Recovery Time Objective (RTO):</strong> 4 hours for critical services.</li>
+            <li><strong>Recovery Point Objective (RPO):</strong> 1 hour of data loss maximum.</li>
+        </ul>
+
+        <h2>4. Incident Response Integration</h2>
+        <p>Business continuity activation is triggered by the Incident Response team when an incident is classified as Level 2 or higher. See the <a href="incident-response-policy.html">Incident Response Policy</a> for details.</p>
+
+        <h2>5. Plan Maintenance</h2>
+        <p>This policy is reviewed quarterly and tested through simulated exercises twice per year.</p>
+
+        <!-- Continue with your full policy text -->
+
+        <hr style="margin: 3rem 0; border-top: 2px solid #e2e8f0;">
+        <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="https://github.com/Gitdigital-products/zk-solana-kyc-compliance-sdk">GitHub</a>
+            <a href="mailto:security@gitdigital.products">Report an issue</a>
+        </div>
+    </div>
+</body>
+</html>
+```

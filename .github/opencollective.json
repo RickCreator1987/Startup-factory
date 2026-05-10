@@ -1,0 +1,8 @@
+{
+  "collective": "solana-project-funds",
+  "tiers": ["backer", "sponsor"],
+  "github": {
+    "owner": "Gitdigital-products",
+    "repo": "zk-solana-kyc-compliance-sdk"
+  }
+}

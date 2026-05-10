@@ -1,0 +1,2 @@
+// --- Security & compatibility versioning for PDAs ---
+pub const SEED_VERSION: u8 = 1u8;

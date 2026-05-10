@@ -1,0 +1,49 @@
+#[derive(Accounts)]
+pub struct VerifyAddress<'info> {
+    #[account(mut)]
+    pub registry_authority: Signer<'info>,
+
+    #[account(
+        seeds = [b"registry-config"],
+        bump,
+    )]
+    pub registry_config: Account<'info, RegistryConfig>,
+
+    #[account(
+        init,
+        payer = registry_authority,
+        space = 8 + 32 + 32 + 1 + 8,
+        seeds = [b"address", user.key().as_ref()],
+        bump
+    )]
+    pub verified_address: Account<'info, VerifiedAddress>,
+
+    pub user: AccountInfo<'info>,
+    pub system_program: Program<'info, System>,
+}
+
+pub fn verify_address(ctx: Context<VerifyAddress>) -> Result<()> {
+    let verified = &mut ctx.accounts.verified_address;
+    let config = &ctx.accounts.registry_config;
+    let registry_authority = ctx.accounts.registry_authority.key();
+
+    // On-chain authority check
+    require!(
+        config.authorities.contains(&registry_authority),
+        CustomError::NotAuthorized
+    );
+
+    verified.user = ctx.accounts.user.key();
+    verified.verifier = registry_authority;
+    verified.verified = true;
+    verified.timestamp = Clock::get()?.unix_timestamp;
+
+    emit!(AddressVerified {
+        user: verified.user,
+        verifier: verified.verifier,
+        timestamp: verified.timestamp,
+    });
+
+    msg!("✅ Verified {} by {}", verified.user, verified.verifier);
+    Ok(())
+}

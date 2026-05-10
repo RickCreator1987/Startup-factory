@@ -1,0 +1,29 @@
+# 1. create branch
+git checkout -b feat/kyc-signer-mobile-offline
+
+# 2. copy files into repo:
+# - server-signer/* (package.json, server.js, README.md)
+# - rn/src/* (kycQueue.ts, App.tsx) or your RN app folder updates
+
+# 3. stage changes
+git add server-signer
+git add rn/src
+git add sdk/typescript/src/offline
+git add sdk/typescript/src/ipfs
+git add sdk/typescript/src/mobile
+git add crates/kyc-utils/src/{crypto.rs,rate_limiter.rs}
+git add crates/kyc-utils/Cargo.toml
+# adjust the above paths as needed based on what you pasted
+
+# 4. commit in logical chunks (I recommend multiple commits)
+git commit -m "feat: add express signer service (sign metadata hashes, ipfs upload, api-key auth, rate-limit)"
+git commit -m "feat(rn): add background sync + queue for mobile offline uploads and on-chain registration"
+git commit -m "feat(sdk): add offline queue and ipfs uploader + verify helper for mobile SDK"
+git commit -m "chore: export crypto & rate limiter modules in kyc-utils"
+
+# 5. push branch
+git push origin feat/kyc-signer-mobile-offline
+
+# 6. open PR on GitHub: go to repo -> Compare & pull request -> create.
+# Use PR title: "feat: server signer + mobile offline queue + background sync"
+# Add description: link to issue/notes: "Adds express signer service for authority attestation, RN offline queue with background sync, and SDK utilities to compress, hash and upload metadata to IPFS. Includes server signer demo and security notes."

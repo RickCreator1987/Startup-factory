@@ -1,0 +1,56 @@
+// server-signer.js
+import nacl from "tweetnacl";
+import { sha256 } from "js-sha256";
+import { encode as msgpackEncode } from "@msgpack/msgpack";
+import brotli from "brotli";
+import { create as createIpfsClient } from "ipfs-http-client";
+import bs58 from "bs58";
+
+/**
+ * Usage: node server-signer.js
+ * - Replace or load your authority keypair securely (here we demo new key).
+ */
+
+async function runDemo() {
+  // 1) keypair (persist this; demo uses fresh pair)
+  const keypair = nacl.sign.keyPair(); // {publicKey, secretKey}
+  const publicKeyBase58 = bs58.encode(Buffer.from(keypair.publicKey));
+
+  // 2) sample metadata
+  const metadata = {
+    name: "Boss Learner",
+    id: "user-1234",
+    jurisdiction: "US",
+    issuedAt: new Date().toISOString()
+  };
+
+  // 3) pack -> compress
+  const packed = msgpackEncode(metadata); // Uint8Array
+  const compressed = brotli.compress(Buffer.from(packed)); // Buffer
+
+  // 4) hash compressed bytes
+  const hashHex = sha256(Buffer.from(compressed)); // hex string
+  const hashBytes = Buffer.from(hashHex, "hex");
+
+  // 5) sign the hash (ed25519)
+  const sig = nacl.sign.detached(new Uint8Array(hashBytes), keypair.secretKey);
+
+  // 6) optionally upload compressed to IPFS
+  const client = createIpfsClient({ url: "https://ipfs.infura.io:5001" });
+  const added = await client.add(compressed);
+  const cid = added.cid.toString();
+
+  console.log("cid:", cid);
+  console.log("metadata_hash(hex):", hashHex);
+  console.log("signature(base64):", Buffer.from(sig).toString("base64"));
+  console.log("public_key(base58):", publicKeyBase58);
+
+  return {
+    cid,
+    metadata_hash_hex: hashHex,
+    signature_b64: Buffer.from(sig).toString("base64"),
+    public_key_b58: publicKeyBase58
+  };
+}
+
+runDemo().catch(console.error);

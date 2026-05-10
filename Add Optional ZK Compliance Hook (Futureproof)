@@ -1,0 +1,6 @@
+#[derive(BorshSerialize, BorshDeserialize, Debug)]
+pub struct VerifyInput {
+    pub address: String,
+    pub document: String,
+    pub zk_proof: Option<Vec<u8>>, // placeholder
+}

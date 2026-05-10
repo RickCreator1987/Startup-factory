@@ -1,0 +1,80 @@
+=== FILE: /meters/workspace/workspace_activity_meter.json ===
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Workspace Activity Meter",
+  "type": "object",
+  "properties": {
+    "workspace_id": {"type": "string"},
+    "issues_created": {"type": "integer"},
+    "issues_updated": {"type": "integer"},
+    "activity_score": {"type": "number"},
+    "threshold_band": {"type": "string", "enum": ["green", "yellow", "red"]},
+    "alert_triggered": {"type": "boolean"},
+    "escalation_triggered": {"type": "boolean"},
+    "extension_points": {
+      "type": "object",
+      "properties": {
+        "custom_field": {"type": "string"},
+        "external_signal": {"type": "string"}
+      }
+    },
+    "dependencies": {"type": "array", "items": {"type": "string"}}
+  },
+  "required": ["workspace_id", "issues_created", "issues_updated"],
+  "thresholds": {
+    "green": {"issues_created": {"min": 10, "max": 50}, "issues_updated": {"min": 10, "max": 50}},
+    "yellow": {"issues_created": {"min": 5, "max": 9}, "issues_updated": {"min": 5, "max": 9}},
+    "red": {"issues_created": {"min": 0, "max": 4}, "issues_updated": {"min": 0, "max": 4}}
+  },
+  "triggers": {
+    "alert": {"threshold_band": "yellow", "duration": 3},
+    "escalation": {"threshold_band": "red", "duration": 2}
+  }
+}
+```
+
+=== FILE: /meters/workspace/workspace_contributor_growth_meter.json ===
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Workspace Contributor Growth Meter",
+  "type": "object",
+  "properties": {
+    "workspace_id": {"type": "string"},
+    "new_contributors": {"type": "integer"},
+    "growth_rate": {"type": "number"},
+    "threshold_band": {"type": "string", "enum": ["green", "yellow", "red"]},
+    "alert_triggered": {"type": "boolean"},
+    "escalation_triggered": {"type": "boolean"},
+    "extension_points": {
+      "type": "object",
+      "properties": {
+        "custom_field": {"type": "string"},
+        "external_signal": {"type": "string"}
+      }
+    },
+    "dependencies": {"type": "array", "items": {"type": "string"}}
+  },
+  "required": ["workspace_id", "new_contributors"],
+  "thresholds": {
+    "green": {"new_contributors": {"min": 5, "max": 10}},
+    "yellow": {"new_contributors": {"min": 2, "max": 4}},
+    "red": {"new_contributors": {"min": 0, "max": 1}}
+  },
+  "triggers": {
+    "alert": {"threshold_band": "yellow", "duration": 3},
+    "escalation": {"threshold_band": "red", "duration": 2}
+  }
+}
+```
+
+=== FILE: /meters/project/project_velocity_meter.json ===
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Project Velocity Meter",
+  "type": "object",
+  "properties": {
+    "project_id": {"type": "string"},
+    "issues_completed":
